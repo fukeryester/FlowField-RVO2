@@ -1,0 +1,110 @@
+项目概述
+请帮我实现一个基于虚幻引擎5的完整流场寻路系统，结合RVO2（Reciprocal Velocity Obstacles）避障算法。该系统需要支持大规模单位群体的智能寻路和动态避障。
+
+核心功能需求
+1. 流场寻路系统 (Flow Field Pathfinding)
+AFlowField类实现：
+（1）网格化流场计算，支持可配置的网格大小和分辨率
+（2）基于Dijkstra算法的热力图计算
+（3）向量场生成，每个网格单元存储指向目标的最优方向
+（4）动态障碍物检测，支持WorldDynamic碰撞检测
+（5）障碍物反向向量填充，防止单位卡在障碍物边缘
+（6）双线性插值支持，提供平滑的移动方向
+（7）实时流场更新，支持动态目标移动
+（8）完整的调试可视化系统
+
+关键参数：
+（1）网格大小 (CellSize): 100.0f
+（2）网格分辨率: 50x50
+（3）障碍物检测半径: 相对于网格大小的比例
+（4）障碍物反向向量强度: 200.0f
+（5）更新间隔: 1.0f秒
+
+2. RVO2避障系统 (Reciprocal Velocity Obstacles)
+AFlowFieldAgent类实现：
+（1）基于RVO2算法的动态避障
+（2）速度障碍物计算和碰撞预测
+（3）最优速度选择算法
+（4）邻居单位检测和交互
+（5）平滑的避障行为
+
+RVO2关键参数：
+（1）邻居检测半径: 100.0f
+（2）时间视野: 2.0f秒
+（3）最大速度: 400.0f
+（4）单位半径: 25.0f
+
+3. 智能单位系统
+单位特性：
+（1）基于流场方向的移动
+（2）RVO2避障集成
+（3）可配置的移动速度和更新频率
+（4）动态网格大小调整
+（5）完整的调试信息显示
+
+单位参数：
+（1）移动速度: 300.0f
+（2）方向更新间隔: 0.02f秒
+（3）单位半径: 25.0f
+
+4. 游戏模式集成
+AFlowFieldTestGameMode类：
+（1）批量单位生成和管理
+（2）RVO2开关控制
+（3）测试场景配置
+
+技术实现要求
+1. 流场算法实现
+// 核心算法流程
+1. 初始化网格 (InitializeFlowField)
+2. 障碍物检测 (DetectObstacles)
+3. 热力图计算 (CalculateHeatMap) - Dijkstra算法
+4. 向量场生成 (CalculateVectorField)
+5. 双线性插值 (BilinearInterpolate)
+
+2. RVO2算法实现
+// RVO2核心步骤
+1. 邻居检测 (GetNearbyAgents)
+2. 速度障碍物计算 (ComputeVelocityObstacle)
+3. 障碍物集合构建
+4. 最优速度选择 (FindBestVelocity)
+5. 速度更新 (ComputeNewVelocity)
+
+3. 数据结构设计
+(1)// 流场热力图计算：基于队列的BFS
+(2)// 流场网格单元
+struct FFlowFieldCell {
+    float Distance;           // 到目标的距离
+    bool bIsObstacle;         // 是否为障碍物
+    FVector2D FlowVector;     // 流向向量
+};
+
+(3)// RVO2速度障碍物
+struct FVelocityObstacle {
+    FVector2D Apex;           // 顶点
+    FVector2D LeftLeg;        // 左边界
+    FVector2D RightLeg;       // 右边界
+};
+
+交付要求
+(1)支持100+单位的流畅运行
+(2)流场更新频率可配置
+(3)单位更新频率可配置
+(4)高效的邻居检测算法
+(5)内存优化的网格存储
+(6)流场向量可视化
+(7)障碍物检测可视化
+(8)RVO2速度障碍物可视化
+(9)单位移动轨迹显示
+(10)实时性能统计
+(11)可配置的调试开关
+(12)所有关键参数支持蓝图编辑
+(13)完整的蓝图接口暴露
+(14)实时参数调整支持
+(15)测试功能蓝图调用
+(16)文件结构：
+Source/FlowFieldCursorTest/
+├── FlowField.h/cpp          // 流场系统核心
+├── FlowFieldAgent.h/cpp     // 智能单位系统
+├── FlowFieldTestGameMode.h/cpp  // 游戏模式
+└── FlowFieldTest.Build.cs   // 构建配置
