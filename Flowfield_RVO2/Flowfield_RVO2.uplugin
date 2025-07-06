@@ -1,0 +1,26 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Flowfield_RVO2",
+	"Description": "A flowfield pathfinding system with rvo2 obstacle avoiding using cursor",
+	"Category": "Pathfinding And Obstacle Avoiding",
+	"CreatedBy": "FukerYester",
+	"CreatedByURL": "",
+	"DocsURL": "https://space.bilibili.com/65694232?spm_id_from=333.1007.0.0",
+	"MarketplaceURL": "",
+	"SupportURL": "https://space.bilibili.com/65694232?spm_id_from=333.1007.0.0",
+	"EngineVersion": "5.4.0",
+	"CanContainContent": true,
+	"Installed": true,
+	"Modules": [
+		{
+			"Name": "Flowfield_RVO2",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"Win64"
+			]
+		}
+	]
+}
