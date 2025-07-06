@@ -1,6 +1,6 @@
-#FLOW FIELD PATHFINDING SYSTEM + RVO2 OBSTACLE AVOIDING SYSTEM
+# FLOW FIELD PATHFINDING SYSTEM + RVO2 OBSTACLE AVOIDING SYSTEM
 
-# 流场寻路系统 (Flow Field Pathfinding System)
+# 1.流场寻路系统 (Flow Field Pathfinding System)
 
 这是一个基于流场算法的寻路系统，适用于UE5项目。系统包含两个主要组件：流场(FlowField)和寻路单位(FlowFieldAgent)。
 
@@ -153,7 +153,7 @@ Source/FlowFieldTest/
 
 
 
-# RVO2避障系统使用说明
+# 2.RVO2避障系统使用说明
 
 ## 概述
 本项目为FlowFieldAgent添加了基于RVO2（Reciprocal Velocity Obstacles）的避障机制，使多个Agent能够智能地避免相互碰撞。同时优化了流场的障碍物检测功能。
